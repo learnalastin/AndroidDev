@@ -1,0 +1,364 @@
+package com.example.myapplication2;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
+
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+
+    private Button button_undo;
+    private Button plus_minus;
+    private Button button_clean;
+    private Button button_zero;
+    private Button button_one;
+    private Button button_two;
+    private Button button_threa;
+    private Button button_four;
+    private Button button_five;
+    private Button button_six;
+    private Button button_seven;
+    private Button button_eight;
+    private Button button_nine;
+    private Button button_sqrt;
+    private Button button_percent;
+    private Button button_plus;
+    private Button button_multiply;
+    private Button button_minus;
+    private Button button_devide;
+    private Button button_dot;
+    private Button button_equal;
+    private TextView tv_active;
+    private TextView tv_history;
+
+    private double num1 = 0;
+    private double num2 = 0;
+    private double result = 0;
+    private double check_number = 0;
+    private String text ;
+    private int code_operation = 0; // 1= +, 2= –, 3= *, 4= /
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        initViews();
+    }
+
+    private void initViews() {
+        tv_active = (TextView) findViewById(R.id.tv_active);
+        tv_history = (TextView) findViewById(R.id.tv_history);
+        button_plus = (Button) findViewById(R.id.button_plus);
+        button_undo = (Button) findViewById(R.id.button_undo);
+        plus_minus = (Button) findViewById(R.id.plus_minus);
+        button_clean = (Button) findViewById(R.id.button_clean);
+        button_zero = (Button) findViewById(R.id.button_zero);
+        button_one = (Button) findViewById(R.id.button_one);
+        button_two = (Button) findViewById(R.id.button_two);
+        button_threa = (Button) findViewById(R.id.button_threa);
+        button_four = (Button) findViewById(R.id.button_four);
+        button_five = (Button) findViewById(R.id.button_five);
+        button_six = (Button) findViewById(R.id.button_six);
+        button_seven = (Button) findViewById(R.id.button_seven);
+        button_eight = (Button) findViewById(R.id.button_eight);
+        button_nine = (Button) findViewById(R.id.button_nine);
+        button_sqrt = (Button) findViewById(R.id.button_sqrt);
+        button_percent = (Button) findViewById(R.id.button_percent);
+        button_multiply = (Button) findViewById(R.id.button_multiply);
+        button_minus = (Button) findViewById(R.id.button_minus);
+        button_devide = (Button) findViewById(R.id.button_devide);
+        button_dot = (Button) findViewById(R.id.button_dot);
+        button_equal = (Button) findViewById(R.id.button_equal);
+        tv_active.setText("0");
+        button_plus.setOnClickListener(this);
+        button_undo.setOnClickListener(this);
+        plus_minus.setOnClickListener(this);
+        button_clean.setOnClickListener(this);
+        button_zero.setOnClickListener(this);
+        button_one.setOnClickListener(this);
+        button_two.setOnClickListener(this);
+        button_threa.setOnClickListener(this);
+        button_four.setOnClickListener(this);
+        button_five.setOnClickListener(this);
+        button_six.setOnClickListener(this);
+        button_seven.setOnClickListener(this);
+        button_eight.setOnClickListener(this);
+        button_nine.setOnClickListener(this);
+        button_sqrt.setOnClickListener(this);
+        button_percent.setOnClickListener(this);
+        button_multiply.setOnClickListener(this);
+        button_minus.setOnClickListener(this);
+        button_devide.setOnClickListener(this);
+        button_dot.setOnClickListener(this);
+        button_equal.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.button_zero:
+                if (tv_active.getText().toString() == "0") {
+                    //
+                } else {
+                    putSymbol("0");
+                }
+                break;
+
+            case R.id.button_one:
+                if (tv_active.getText().toString() == "0") {
+                    tv_active.setText("");
+                }
+                putSymbol("1");
+                break;
+
+            case R.id.button_two:
+                if (tv_active.getText().toString() == "0") {
+                    tv_active.setText("");
+                }
+                putSymbol("2");
+                break;
+
+            case R.id.button_threa:
+                if (tv_active.getText().toString() == "0") {
+                    tv_active.setText("");
+                }
+                putSymbol("3");
+                break;
+
+            case R.id.button_four:
+                if (tv_active.getText().toString() == "0") {
+                    tv_active.setText("");
+                }
+                putSymbol("4");
+                break;
+
+            case R.id.button_five:
+                if (tv_active.getText().toString() == "0") {
+                    tv_active.setText("");
+                }
+                putSymbol("5");
+                break;
+
+            case R.id.button_six:
+                if (tv_active.getText().toString() == "0") {
+                    tv_active.setText("");
+                }
+                putSymbol("6");
+                break;
+
+            case R.id.button_seven:
+                if (tv_active.getText().toString() == "0") {
+                    tv_active.setText("");
+                }
+                putSymbol("7");
+                break;
+
+            case R.id.button_eight:
+                if (tv_active.getText().toString() == "0") {
+                    tv_active.setText("");
+                }
+                putSymbol("8");
+                break;
+
+            case R.id.button_nine:
+                if (tv_active.getText().toString() == "0") {
+                    tv_active.setText("");
+                }
+                putSymbol("9");
+                break;
+
+            case R.id.button_plus:
+                if (tv_active.getText().toString() == "0" || tv_active.getText().toString() == "") {
+
+                } else {
+                    num1 = Double.parseDouble(tv_active.getText().toString());
+                    code_operation = 1;
+                    putSymbol("+");
+                    tv_history.setText(tv_active.getText().toString());
+                    tv_active.setText("0");
+                }
+                break;
+
+            case R.id.button_undo:
+                if (tv_active.getText().toString() == "0") {
+
+                } else {
+                    text = tv_active.getText().toString();
+                    if(text.length() >1){
+                    text = text.substring(0, text.length()-1);
+                    tv_active.setText(text);
+                    }else{
+                        tv_active.setText("0");
+                    }
+                }
+                break;
+
+            case R.id.plus_minus:
+                if (tv_active.getText().toString() == "0" || tv_active.getText().toString() == "") {
+
+                } else {
+                    check_number = Double.parseDouble(tv_active.getText().toString());
+                    if(check_number > 0) {
+                        text = tv_active.getText().toString();
+                        text = "-" + text;
+                        tv_active.setText(text);
+                    }else {
+                        text = tv_active.getText().toString();
+                        text = text.substring(1);
+                        tv_active.setText(text);
+                    }
+                }
+                break;
+
+            case R.id.button_clean:
+                tv_active.setText("0");
+                tv_history.setText("");
+                break;
+
+            case R.id.button_sqrt:
+                if (tv_active.getText().toString() == "0" || tv_active.getText().toString() == "") {
+
+                } else {
+                    num1 = Double.parseDouble(tv_active.getText().toString());
+                    result = Math.sqrt(num1);
+                    String total = String.valueOf(result);
+                    tv_history.setText(total);
+                    tv_active.setText("0");
+                }
+                break;
+
+            case R.id.button_percent:
+                if (tv_active.getText().toString() == "0") {
+
+                } else {
+                    num1 = Double.parseDouble(tv_active.getText().toString());
+                    result = 1/num1;
+                    String total = String.valueOf(result);
+                    tv_history.setText(total);
+                    tv_active.setText("0");
+                }
+                break;
+
+            case R.id.button_multiply:
+                if (tv_active.getText().toString() == "0" || tv_active.getText().toString() == "") {
+
+                } else {
+                    num1 = Double.parseDouble(tv_active.getText().toString());
+                    code_operation = 3;
+                    putSymbol("*");
+                    tv_history.setText(tv_active.getText().toString());
+                    tv_active.setText("0");
+                }
+                break;
+
+            case R.id.button_devide:
+                if (tv_active.getText().toString() == "0") {
+
+                } else {
+                    num1 = Double.parseDouble(tv_active.getText().toString());
+                    code_operation = 4;
+                    putSymbol("/");
+                    tv_history.setText(tv_active.getText().toString());
+                    tv_active.setText("0");
+                }
+                break;
+
+            case R.id.button_dot:
+                //if (tv_active.getText().toString() == "0") {
+
+               // } else {
+                    text = tv_active.getText().toString();
+                    if(text.indexOf('.')>=0){
+
+                    }else{
+                    putSymbol(".");}
+                //}
+                break;
+
+            case R.id.button_minus:
+                if (tv_active.getText().toString() == "0") {
+
+                } else {
+                    num1 = Double.parseDouble(tv_active.getText().toString());
+                    code_operation = 2;
+                    putSymbol("-");
+                    tv_history.setText(tv_active.getText().toString());
+                    tv_active.setText("0");
+                }
+                break;
+
+            case R.id.button_equal:
+                Toast.makeText(this, "Done", Toast.LENGTH_SHORT).show();
+                num2 = Double.parseDouble(tv_active.getText().toString());
+                if (code_operation == 1) {
+                    result = num1 + num2;
+                    String total = String.valueOf(result);
+                    tv_history.setText(total);
+                    tv_active.setText("0");
+                }
+                if (code_operation == 2) {
+                    result = num1 - num2;
+                    String total = String.valueOf(result);
+                    tv_history.setText(total);
+                    tv_active.setText("0");
+                }
+                if (code_operation == 3) {
+                    result = num1 * num2;
+                    String total = String.valueOf(result);
+                    tv_history.setText(total);
+                    tv_active.setText("0");
+                }
+                if (code_operation == 4) {
+                    if(num2 != 0){
+                    result = num1 / num2;
+                    String total = String.valueOf(result);
+                    tv_history.setText(total);
+                    tv_active.setText("0");
+                    }
+                }
+                break;
+        }
+    }
+
+
+    private void putSymbol(String newNumber) {
+        tv_active.setText(tv_active.getText().toString().concat(newNumber));
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("SaveTvCalculation",
+                tv_active.getText().toString());
+        outState.putString("SaveTvResult", tv_history.getText().toString());
+        outState.putDouble("SaveNum1", num1);
+        outState.putDouble("SaveNum2", num2);
+        outState.putDouble("SaveResult", result);
+        outState.putInt("SaveCodeOperation", code_operation);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState){
+        super.onRestoreInstanceState(savedInstanceState);
+        tv_active.setText(savedInstanceState.getString
+                ("SaveTvCalculation"));
+        tv_history.setText(savedInstanceState.getString("SaveTvResult"));
+        num1 = savedInstanceState.getDouble("SaveNum1");
+        num2 = savedInstanceState.getDouble("SaveNum2");
+        result = savedInstanceState.getDouble("SaveResult");
+        code_operation = savedInstanceState.getInt("SaveCodeOperation");
+    }
+}
+
+    /*
+    tv_active.setText(tv_active.getText().toString().replace("-", ""));
+
+    double number = Double.parseDouble(tv_active.getText().toString());
+
+    tv_active.setText(String.valueOf(int_result));
+
+    tv_active.setText(String.valueOf(result.doubleValue()));
+    }*/
